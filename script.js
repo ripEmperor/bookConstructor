@@ -37,44 +37,106 @@ function viewLibrary() {
                             Pages: ${myLibrary[i].pages} <br>
                             Has been read?: ${myLibrary[i].read} <br>`
     }
+
+    myLibrary = [];
 }
 
 function addBook() {
-    let addDiv = document.getElementById('library');
+    let addBookBtn = document.getElementById('add')
+    let addDiv = document.getElementById('addForm');
+    let addBookBtnCont = document.getElementById('btnCont')
+
+    const formDiv = document.createElement("div");
+    addDiv.appendChild(formDiv)
+    formDiv.classList.add('form')
+
+    const submitButton = document.createElement('button');
+
+    submitButton.setAttribute('id', 'submitButton');
+    submitButton.setAttribute('onclick', 'addBookClick()');
+
+    formDiv.appendChild(submitButton);
+
+    const formTitle = document.createElement("div");
+    formDiv.appendChild(formTitle);
+
+    const formAuthor = document.createElement("div");
+    formDiv.appendChild(formAuthor);
+
+    const formPages = document.createElement("div");
+    formDiv.appendChild(formPages);
+
+    const formRead = document.createElement("div");
+    formDiv.appendChild(formRead);
+
+    const bookTitleL = document.createElement("label");
+    bookTitleL.setAttribute('for', 'title');
+    bookTitleL.innerHTML = "Title"
+
+    const bookTitle = document.createElement("input");
+    bookTitle.setAttribute('type', 'text');
+    bookTitle.setAttribute('id', 'title');
+
+    const bookAuthorL = document.createElement("label");
+    bookAuthorL.setAttribute('for', 'author');
+    bookAuthorL.innerHTML = "Author"
+
+    const bookAuthor = document.createElement("input");
+    bookAuthor.setAttribute('type', 'text');
+    bookAuthor.setAttribute('id', 'author');
+
+    const bookPagesL = document.createElement("label");
+    bookPagesL.setAttribute('for', 'pages');
+    bookPagesL.innerHTML = "Pages"
+
+    const bookPages = document.createElement("input");
+    bookPages.setAttribute('type', 'text');
+    bookPages.setAttribute('id', 'pages');
+
+    const bookReadL = document.createElement("label");
+    bookReadL.setAttribute('for', 'read');
+    bookReadL.innerHTML = "Read? "
+
+    const bookRead = document.createElement("input");
+    bookRead.setAttribute('type', 'checkbox');
+    bookRead.setAttribute('id', 'pages');
+    bookRead.setAttribute('class', 'read');
+
+    formTitle.appendChild(bookTitleL);
+    formTitle.appendChild(bookTitle);
+    formAuthor.appendChild(bookAuthorL);
+    formAuthor.appendChild(bookAuthor);
+    formPages.appendChild(bookPagesL);
+    formPages.appendChild(bookPages);
+    formRead.appendChild(bookReadL);
+    formRead.appendChild(bookRead);
+
+    addBookBtn.remove()
 }
 
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false)
+function addBookClick() {
+    let Title = document.getElementById('title')
+    let Author = document.getElementById('author')
+    let Pages = document.getElementById('pages')
+    
+    var checkedValue = null; 
+    var inputElements = document.getElementsByClassName('read');
+    for(var i=0; inputElements[i]; ++i){
+        if(inputElements[i].checked){
+            checkedValue = inputElements[i].value;
+            break;
+        }
+    }
 
-addBookToLibrary("The Hobbit1", "J.R.R. Tolkien", 295, false)
+    if (checkedValue == 'on') {
+        checkedValue = true;
+    } else {
+        checkedValue = false;
+    }
 
-addBookToLibrary("The Hobbit2", "J.R.R. Tolkien", 295, false)
+    addBookToLibrary(Title.value, Author.value, Pages.value, checkedValue)
 
-addBookToLibrary("The Hobbit3", "J.R.R. Tolkien", 295, false)
-
-
-
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false)
-
-addBookToLibrary("The Hobbit1", "J.R.R. Tolkien", 295, false)
-
-addBookToLibrary("The Hobbit2", "J.R.R. Tolkien", 295, false)
-
-addBookToLibrary("The Hobbit3", "J.R.R. Tolkien", 295, false)
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false)
-
-addBookToLibrary("The Hobbit1", "J.R.R. Tolkien", 295, false)
-
-addBookToLibrary("The Hobbit2", "J.R.R. Tolkien", 295, false)
-
-addBookToLibrary("The Hobbit3", "J.R.R. Tolkien", 295, false)
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false)
-
-addBookToLibrary("The Hobbit1", "J.R.R. Tolkien", 295, false)
-
-addBookToLibrary("The Hobbit2", "J.R.R. Tolkien", 295, false)
-
-addBookToLibrary("The Hobbit3", "J.R.R. Tolkien", 295, false)
-
-viewLibrary()
+    viewLibrary()
+}
 
 console.log(myLibrary)

@@ -34,4 +34,45 @@ body {
     width: 100px;
     align-self: center;
     justify-self: center;
+    grid-row: 3/4
+}
+
+.addForm {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.form {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    display: grid;
+    width: 250px;
+    height: 200px;
+    background-color: white;
+    padding: 10px;
+}
+
+#submitButton {
+    grid-row: 5/6;
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    border: solid 1px black;
+    justify-self: center;
+}
+
+label {
+    display: inline-block;
+}
+
+input[type='text'] {
+    display: inline-block;
+    float: right;
+}
+
+input[type='checkbox'] {
+    display: inline-block;
+    margin-left: 25px;
 }
