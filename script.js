@@ -65,59 +65,26 @@ function addBook() {
 
     formDiv.appendChild(submitButton);
 
-    const formTitle = document.createElement("div");
-    formDiv.appendChild(formTitle);
+    let categories = ['title', 'author', 'pages', 'read']
+    htmlObject = {};
 
-    const formAuthor = document.createElement("div");
-    formDiv.appendChild(formAuthor);
+    for (i in categories) {
+        i = categories[i]
 
-    const formPages = document.createElement("div");
-    formDiv.appendChild(formPages);
+        htmlObject[`${i}F`] = document.createElement("div");
+        formDiv.appendChild(htmlObject[`${i}F`])
 
-    const formRead = document.createElement("div");
-    formDiv.appendChild(formRead);
+        htmlObject.i = document.createElement("input");
+        htmlObject.i.setAttribute('type', 'text');
+        htmlObject.i.setAttribute('id', i);
 
-    const bookTitleL = document.createElement("label");
-    bookTitleL.setAttribute('for', 'title');
-    bookTitleL.innerHTML = "Title"
+        htmlObject[`${i}L`] = document.createElement("label");
+        htmlObject[`${i}L`].setAttribute('for', i);
+        htmlObject[`${i}L`].innerHTML = i
 
-    const bookTitle = document.createElement("input");
-    bookTitle.setAttribute('type', 'text');
-    bookTitle.setAttribute('id', 'title');
-
-    const bookAuthorL = document.createElement("label");
-    bookAuthorL.setAttribute('for', 'author');
-    bookAuthorL.innerHTML = "Author"
-
-    const bookAuthor = document.createElement("input");
-    bookAuthor.setAttribute('type', 'text');
-    bookAuthor.setAttribute('id', 'author');
-
-    const bookPagesL = document.createElement("label");
-    bookPagesL.setAttribute('for', 'pages');
-    bookPagesL.innerHTML = "Pages"
-
-    const bookPages = document.createElement("input");
-    bookPages.setAttribute('type', 'text');
-    bookPages.setAttribute('id', 'pages');
-
-    const bookReadL = document.createElement("label");
-    bookReadL.setAttribute('for', 'read');
-    bookReadL.innerHTML = "Read? "
-
-    const bookRead = document.createElement("input");
-    bookRead.setAttribute('type', 'checkbox');
-    bookRead.setAttribute('id', 'pages');
-    bookRead.setAttribute('class', 'read');
-
-    formTitle.appendChild(bookTitleL);
-    formTitle.appendChild(bookTitle);
-    formAuthor.appendChild(bookAuthorL);
-    formAuthor.appendChild(bookAuthor);
-    formPages.appendChild(bookPagesL);
-    formPages.appendChild(bookPages);
-    formRead.appendChild(bookReadL);
-    formRead.appendChild(bookRead);
+        htmlObject[`${i}F`].appendChild(htmlObject.i)
+        htmlObject[`${i}F`].appendChild(htmlObject[`${i}L`])
+    }
 
     addBookBtn.remove()
 }
