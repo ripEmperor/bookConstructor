@@ -40,9 +40,30 @@ function viewLibrary() {
                                 Pages: ${myLibrary[i].pages} <br>
                                 Has been read?: ${myLibrary[i].read} <br>
                                 index: ${i} <br>
-                                <button onclick=removeBook(${i})>Remove</button>`
+                                <button onclick=removeBook(${i})>Remove</button>
+                                <button onclick=changeRead(${i})>Change Read Status</button>`
         }
     }
+}
+
+function updateEntry(id) {
+    document.querySelector(`[data-index='${id}']`).innerHTML = `Title: ${myLibrary[i].title} <br> 
+    Author: ${myLibrary[i].author} <br>
+    Pages: ${myLibrary[i].pages} <br>
+    Has been read?: ${myLibrary[i].read} <br>
+    index: ${i} <br>
+    <button onclick=removeBook(${i})>Remove</button>
+    <button onclick=changeRead(${i})>Change Read Status</button>`
+}
+
+function changeRead(id) {
+    if (myLibrary[id].read == false) {
+        myLibrary[id].read = true;
+    } else {
+        myLibrary[id].read = false;
+    }
+
+    updateEntry(id)
 }
 
 function removeBook(id) {
@@ -69,13 +90,18 @@ function addBook() {
     htmlObject = {};
 
     for (i in categories) {
-        i = categories[i]
+        let inputType = 'text';
+        i = categories[i] 
 
         htmlObject[`${i}F`] = document.createElement("div");
         formDiv.appendChild(htmlObject[`${i}F`])
 
         htmlObject.i = document.createElement("input");
-        htmlObject.i.setAttribute('type', 'text');
+        if (i == 'read') {
+            htmlObject.i.setAttribute('type', 'checkbox');
+        } else {
+            htmlObject.i.setAttribute('type', inputType);
+        }
         htmlObject.i.setAttribute('id', i);
 
         htmlObject[`${i}L`] = document.createElement("label");
@@ -95,19 +121,8 @@ function addBookClick() {
     let Pages = document.getElementById('pages')
     
     var checkedValue = null; 
-    var inputElements = document.getElementsByClassName('read');
-    for(var i=0; inputElements[i]; ++i){
-        if(inputElements[i].checked){
-            checkedValue = inputElements[i].value;
-            break;
-        }
-    }
-
-    if (checkedValue == 'on') {
-        checkedValue = true;
-    } else {
-        checkedValue = false;
-    }
+    var inputElements = document.getElementById('read');
+    checkedValue = inputElements.checked;
 
     addBookToLibrary(Title.value, Author.value, Pages.value, checkedValue)
 
