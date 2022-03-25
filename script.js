@@ -90,18 +90,22 @@ function addBook() {
     htmlObject = {};
 
     for (i in categories) {
-        let inputType = 'text';
         i = categories[i] 
 
         htmlObject[`${i}F`] = document.createElement("div");
         formDiv.appendChild(htmlObject[`${i}F`])
 
         htmlObject.i = document.createElement("input");
+
+        let inputType;
+
         if (i == 'read') {
-            htmlObject.i.setAttribute('type', 'checkbox');
+            inputType = 'checkbox'
         } else {
-            htmlObject.i.setAttribute('type', inputType);
+            inputType = 'text'
         }
+
+        htmlObject.i.setAttribute('type', inputType);
         htmlObject.i.setAttribute('id', i);
 
         htmlObject[`${i}L`] = document.createElement("label");
