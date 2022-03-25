@@ -22,23 +22,31 @@ function addBookToLibrary(title, author, pages, read) {
 
 function viewLibrary() {
     let library = document.getElementById('library')
+    let viewed = Array.from(document.querySelectorAll('[data-index]'));
 
     for (i in myLibrary) {
-        const newDiv = document.createElement("div");
+        if (!(i in viewed)) {
+            const newDiv = document.createElement("div");
 
-        library.appendChild(newDiv)
+            library.appendChild(newDiv)
 
-        library.classList.add('container')
+            library.classList.add('container')
 
-        newDiv.classList.add('item')
+            newDiv.classList.add('item')
+            newDiv.setAttribute('data-index', i);
 
-        newDiv.innerHTML = `Title: ${myLibrary[i].title} <br> 
-                            Author: ${myLibrary[i].author} <br>
-                            Pages: ${myLibrary[i].pages} <br>
-                            Has been read?: ${myLibrary[i].read} <br>`
+            newDiv.innerHTML = `Title: ${myLibrary[i].title} <br> 
+                                Author: ${myLibrary[i].author} <br>
+                                Pages: ${myLibrary[i].pages} <br>
+                                Has been read?: ${myLibrary[i].read} <br>
+                                index: ${i} <br>
+                                <button onclick=removeBook(${i})>Remove</button>`
+        }
     }
+}
 
-    myLibrary = [];
+function removeBook(id) {
+    document.querySelector(`[data-index='${id}']`).remove()
 }
 
 function addBook() {
